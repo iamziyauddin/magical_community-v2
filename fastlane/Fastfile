@@ -1,0 +1,125 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Build and upload to Google Play Console"
+  lane :deploy do
+    # Build the Flutter app
+    sh "flutter build appbundle --release"
+    
+    # Upload to Google Play
+    upload_to_play_store(
+      track: 'internal',
+      aab: '../build/app/outputs/bundle/release/app-release.aab',
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+  end
+
+  desc "Build and upload to Firebase App Distribution"
+  lane :beta do
+    # Build the Flutter app
+    sh "flutter build apk --release"
+    
+    # Upload to Firebase App Distribution
+    firebase_app_distribution(
+      app: "1:123456789:android:abcd1234",  # Replace with your Firebase app ID
+      testers: "tester1@example.com, tester2@example.com",  # Replace with tester emails
+      release_notes: "Bug fixes and improvements",
+      apk_path: "../build/app/outputs/flutter-apk/app-release.apk"
+    )
+  end
+
+  desc "Build debug APK"
+  lane :debug do
+    sh "flutter build apk --debug"
+  end
+end
+
+platform :ios do
+  desc "Build and upload to TestFlight"
+  lane :beta do
+    # Setup certificates and provisioning profiles
+    setup_ci if ENV['CI']
+    match(type: "appstore", readonly: true)
+    
+    # Build the Flutter app
+    sh "flutter build ios --release --no-codesign"
+    
+    # Build and sign with Xcode
+    build_app(
+      workspace: "ios/Runner.xcworkspace",
+      scheme: "Runner",
+      export_method: "app-store",
+      export_options: {
+        uploadBitcode: false,
+        uploadSymbols: true,
+        compileBitcode: false
+      }
+    )
+    
+    # Upload to TestFlight
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      skip_submission: true
+    )
+  end
+
+  desc "Build and upload to App Store"
+  lane :deploy do
+    # Setup certificates and provisioning profiles
+    setup_ci if ENV['CI']
+    match(type: "appstore", readonly: true)
+    
+    # Build the Flutter app
+    sh "flutter build ios --release --no-codesign"
+    
+    # Build and sign with Xcode
+    build_app(
+      workspace: "ios/Runner.xcworkspace",
+      scheme: "Runner",
+      export_method: "app-store"
+    )
+    
+    # Upload to App Store
+    upload_to_app_store(
+      force: true,
+      reject_if_possible: true,
+      skip_metadata: false,
+      skip_screenshots: false,
+      skip_binary_upload: false
+    )
+  end
+
+  desc "Build IPA for development"
+  lane :development do
+    # Setup certificates and provisioning profiles  
+    match(type: "development", readonly: true)
+    
+    # Build the Flutter app
+    sh "flutter build ios --release --no-codesign"
+    
+    # Build and sign with Xcode
+    build_app(
+      workspace: "ios/Runner.xcworkspace", 
+      scheme: "Runner",
+      export_method: "development"
+    )
+  end
+end

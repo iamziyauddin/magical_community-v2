@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="512" cy="512" r="512" fill="#67B437"/>
+  
+  <!-- Outer Ring -->
+  <circle cx="512" cy="512" r="450" fill="#4CAF50" stroke="#2E7D32" stroke-width="8"/>
+  
+  <!-- Heart Shape -->
+  <path d="M512 320 C512 270, 462 220, 412 220 C362 220, 312 270, 312 320 C312 370, 512 570, 512 570 C512 570, 712 370, 712 320 C712 270, 662 220, 612 220 C562 220, 512 270, 512 320 Z" fill="#E53E3E"/>
+  
+  <!-- Pulse Line -->
+  <path d="M200 512 L350 512 L380 450 L420 580 L450 400 L480 620 L510 512 L540 512 L570 450 L600 580 L630 480 L660 540 L690 512 L824 512" 
+        stroke="#FFFFFF" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Wellness Leaves -->
+  <path d="M300 400 Q280 380 260 400 Q280 420 300 400" fill="#4CAF50"/>
+  <path d="M724 400 Q744 380 764 400 Q744 420 724 400" fill="#4CAF50"/>
+  <path d="M400 280 Q380 260 360 280 Q380 300 400 280" fill="#4CAF50"/>
+  <path d="M624 280 Q644 260 664 280 Q644 300 624 280" fill="#4CAF50"/>
+  
+  <!-- Text "MC" for Magical Community -->
+  <text x="512" y="750" font-family="Arial, sans-serif" font-size="120" font-weight="bold" text-anchor="middle" fill="#1A1A1A">MC</text>
+</svg>

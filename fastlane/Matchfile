@@ -1,0 +1,6 @@
+# fastlane match configuration
+git_url("https://github.com/your-username/certificates") # Replace with your certificates repository
+storage_mode("git")
+type("appstore") # Valid values: appstore, adhoc, development, enterprise
+app_identifier(["com.mindmesh.magicalcommunity"])
+username("your-apple-id@example.com") # Replace with your Apple ID

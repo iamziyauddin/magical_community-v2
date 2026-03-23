@@ -1,0 +1,80 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Flutter Clean",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"clean"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Flutter Build AppBundle (prod)",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"build",
+				"appbundle",
+				"--dart-define=ENVIRONMENT=prod"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Flutter Build AppBundle (prod)",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"build",
+				"appbundle",
+				"--dart-define=ENVIRONMENT=prod",
+				"--no-daemon"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$eslint-stylish"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Flutter Build AppBundle (prod)",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"build",
+				"appbundle",
+				"--dart-define=ENVIRONMENT=prod"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$flutter-build"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Flutter Build AppBundle (prod, no-tree-shake-icons)",
+			"type": "shell",
+			"command": "flutter",
+			"args": [
+				"build",
+				"appbundle",
+				"--dart-define=ENVIRONMENT=prod",
+				"--no-tree-shake-icons"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$flutter-build"
+			],
+			"group": "build"
+		}
+	]
+}

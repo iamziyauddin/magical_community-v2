@@ -1,0 +1,87 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# iOS related - platform specific files that should not be committed
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/.symlinks/
+**/ios/Pods/
+**/ios/build/
+**/ios/**/**/xcuserdata/
+**/ios/**/**/*.xcuserstate
+**/ios/**/**/*.xcuserdatad/
+**/ios/**/**/UserInterfaceState.xcuserstate
+
+# macOS related
+**/macos/Flutter/Generated.xcconfig
+**/macos/Flutter/flutter_export_environment.sh
+**/macos/.symlinks/
+**/macos/Pods/
+
+# Windows related
+**/windows/flutter/generated_plugins.cmake
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/flutter/generated_plugin_registrant.h
+
+# Web related
+**/web/flutter_service_worker.js
+
+# Platform specific generated files
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+android/local.properties
+
+# Keystore files - NEVER commit these to version control!
+*.jks
+*.keystore
+android/key.properties
+android/app/*.jks
+android/app/*.keystore
+
+# Keystore creation scripts (you can remove these lines if you want to commit the scripts)
+create_keystore.bat
+create_keystore.ps1

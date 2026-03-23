@@ -1,0 +1,46 @@
+<!-- Wellness-themed App Icon for Magical Community -->
+<!-- This SVG represents: Heart health, community wellness, transformation journey -->
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  
+  <!-- Green Background (Wellness Energy) -->
+  <rect width="1024" height="1024" fill="#67B437" rx="120" ry="120"/>
+  
+  <!-- Green Wellness Circle -->
+  <circle cx="512" cy="512" r="400" fill="#4CAF50" stroke="#2E7D32" stroke-width="8"/>
+  
+  <!-- Heart Symbol (Health Focus) -->
+  <g transform="translate(512, 380)">
+    <!-- Left heart curve -->
+    <circle cx="-60" cy="-20" r="60" fill="#E53E3E"/>
+    <!-- Right heart curve -->
+    <circle cx="60" cy="-20" r="60" fill="#E53E3E"/>
+    <!-- Heart bottom -->
+    <path d="M -120 20 L 0 140 L 120 20 Z" fill="#E53E3E"/>
+  </g>
+  
+  <!-- Pulse/Heartbeat Line (Health Monitoring) -->
+  <path d="M 150 520 L 280 520 L 320 460 L 360 580 L 400 480 L 440 540 L 480 520 L 544 520 L 584 460 L 624 580 L 664 480 L 704 540 L 744 520 L 874 520" 
+        stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round"/>
+  
+  <!-- Wellness Leaves (Natural Health) -->
+  <g fill="#2E7D32" opacity="0.7">
+    <ellipse cx="300" cy="300" rx="20" ry="40" transform="rotate(-45 300 300)"/>
+    <ellipse cx="724" cy="300" rx="20" ry="40" transform="rotate(45 724 300)"/>
+    <ellipse cx="300" cy="724" rx="20" ry="40" transform="rotate(45 300 724)"/>
+    <ellipse cx="724" cy="724" rx="20" ry="40" transform="rotate(-45 724 724)"/>
+  </g>
+  
+  <!-- Community Initials -->
+  <text x="512" y="720" font-family="Arial, sans-serif" font-size="80" font-weight="bold" 
+        text-anchor="middle" fill="#1A1A1A">MC</text>
+  
+  <!-- Subtle shine effect -->
+  <defs>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.3)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#shine)" rx="120" ry="120"/>
+  
+</svg>

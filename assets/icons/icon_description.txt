@@ -1,0 +1,12 @@
+// This is a placeholder - we'll create the actual PNG icon manually
+// App icon features:
+// - Heart symbol in center (representing health/wellness)
+// - Green and gold colors (wellness theme)
+// - "MC" text for Magical Community
+// - Pulse/heartbeat line (health monitoring)
+
+// Icon will be 1024x1024 PNG with:
+// Background: Golden yellow (#FFD700)
+// Heart: Red (#E53E3E) 
+// Accent: Green (#4CAF50)
+// Text: Dark (#1A1A1A)

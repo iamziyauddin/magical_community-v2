@@ -1,0 +1,7 @@
+# This file contains sensitive information. Do not commit to version control!
+# Add this file to your .gitignore
+
+storePassword=YOUR_KEYSTORE_PASSWORD
+keyPassword=YOUR_KEY_PASSWORD
+keyAlias=magical-community
+storeFile=app/magical-community-key.jks

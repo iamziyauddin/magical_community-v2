@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter (Development)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=ENVIRONMENT=dev"
+      ]
+    },
+    {
+      "name": "Flutter (Production)",
+      "request": "launch",
+      "type": "dart",
+      "args": [
+        "--dart-define=ENVIRONMENT=prod"
+      ]
+    },
+    {
+      "name": "Flutter (Default - Dev)",
+      "request": "launch",
+      "type": "dart"
+    }
+  ]
+}
