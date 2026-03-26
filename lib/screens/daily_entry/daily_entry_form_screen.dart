@@ -10,8 +10,9 @@ import 'daily_entry_model.dart';
 /// Pass [existingEntry] to pre-fill fields for editing.
 class DailyEntryFormScreen extends StatefulWidget {
   final DailyEntryData? existingEntry;
+  final List<DateTime>? existingDates;
 
-  const DailyEntryFormScreen({super.key, this.existingEntry});
+  const DailyEntryFormScreen({super.key, this.existingEntry, this.existingDates});
 
   bool get isEditing => existingEntry != null;
 
@@ -61,8 +62,7 @@ class _DailyEntryFormScreenState extends State<DailyEntryFormScreen> {
   // Submission state
   bool _isSubmitting = false;
 
-  // Club ID – TODO: inject via session/auth
-  static const String _clubId = 'cmeqwbcij000312qwdm95ib54';
+  
 
   String get _selectedDay => DateFormat('EEEE').format(_selectedDate);
 
@@ -205,7 +205,7 @@ class _DailyEntryFormScreenState extends State<DailyEntryFormScreen> {
       context: context,
       initialDate: _selectedDate,
       firstDate: DateTime(2020),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
+      lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -279,7 +279,7 @@ class _DailyEntryFormScreenState extends State<DailyEntryFormScreen> {
     }
 
     return {
-      'clubId': _clubId,
+      
       'entryDate': DateFormat('yyyy-MM-dd').format(entry.date),
       'visitEntry': entry.visitEntry,
       'trialsStart': entry.trialsStart,
@@ -397,8 +397,64 @@ class _DailyEntryFormScreenState extends State<DailyEntryFormScreen> {
   void _submitForm() {
     if (_formKey.currentState?.validate() ?? false) {
       final entry = _buildEntryData();
+
+      if (widget.existingDates != null) {
+        final isDuplicate = widget.existingDates!.any((d) {
+          if (widget.isEditing && widget.existingEntry!.date.year == d.year && widget.existingEntry!.date.month == d.month && widget.existingEntry!.date.day == d.day) {
+            return false;
+          }
+          return d.year == _selectedDate.year &&
+                 d.month == _selectedDate.month &&
+                 d.day == _selectedDate.day;
+        });
+        
+        if (isDuplicate) {
+          _showOverwriteConfirmationDialog(entry);
+          return;
+        }
+      }
+
       _showConfirmationDialog(entry);
     }
+  }
+
+  void _showOverwriteConfirmationDialog(DailyEntryData entry) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Row(
+          children: [
+            Icon(Icons.warning_amber_rounded, color: AppTheme.accentYellow, size: 26),
+            const SizedBox(width: 10),
+            const Text('Entry Exists', style: TextStyle(fontWeight: FontWeight.w700)),
+          ],
+        ),
+        content: Text(
+          'An entry for ${entry.formattedDate} already exists. Do you want to overwrite it?',
+          style: const TextStyle(fontSize: 14, color: AppTheme.darkGrey),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('No', style: TextStyle(color: AppTheme.darkGrey)),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              _showConfirmationDialog(entry);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppTheme.accentYellow,
+              foregroundColor: AppTheme.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              elevation: 0,
+            ),
+            child: const Text('Yes', style: TextStyle(fontWeight: FontWeight.w600)),
+          ),
+        ],
+      ),
+    );
   }
 
   // ─── Confirmation Dialog ───────────────────────────────────────

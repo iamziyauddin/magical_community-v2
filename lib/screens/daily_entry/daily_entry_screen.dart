@@ -117,7 +117,11 @@ class _DailyEntryScreenState extends State<DailyEntryScreen>
   Future<void> _openAddForm() async {
     final result = await Navigator.push<dynamic>(
       context,
-      MaterialPageRoute(builder: (_) => const DailyEntryFormScreen()),
+      MaterialPageRoute(
+        builder: (_) => DailyEntryFormScreen(
+          existingDates: _entries.map((e) => e.date).toList(),
+        ),
+      ),
     );
     // result is true when the POST was successful
     if (result == true) {
@@ -130,7 +134,10 @@ class _DailyEntryScreenState extends State<DailyEntryScreen>
     final result = await Navigator.push<dynamic>(
       context,
       MaterialPageRoute(
-        builder: (_) => DailyEntryFormScreen(existingEntry: _entries[index]),
+        builder: (_) => DailyEntryFormScreen(
+          existingEntry: _entries[index],
+          existingDates: _entries.map((e) => e.date).toList(),
+        ),
       ),
     );
     if (result == true) {
@@ -560,45 +567,57 @@ class _DailyEntryScreenState extends State<DailyEntryScreen>
   // ─── Empty State ───────────────────────────────────────────────
 
   Widget _buildEmptyState() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: AppTheme.accentYellow.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.edit_calendar_outlined,
-                size: 64,
-                color: AppTheme.accentYellow.withOpacity(0.7),
+    return RefreshIndicator(
+      onRefresh: _fetchDailyEntries,
+      color: AppTheme.accentYellow,
+      child: CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(24),
+                      decoration: BoxDecoration(
+                        color: AppTheme.accentYellow.withOpacity(0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.edit_calendar_outlined,
+                        size: 64,
+                        color: AppTheme.accentYellow.withOpacity(0.7),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    const Text(
+                      'No Entries Yet',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.primaryBlack,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Tap the button below to add your\nfirst daily entry.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppTheme.darkGrey.withOpacity(0.8),
+                        height: 1.5,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 24),
-            const Text(
-              'No Entries Yet',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: AppTheme.primaryBlack,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Tap the button below to add your\nfirst daily entry.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: AppTheme.darkGrey.withOpacity(0.8),
-                height: 1.5,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
