@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magical_community/core/theme/app_theme.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -83,14 +84,18 @@ class AboutScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: AppTheme.accentYellow),
                       ),
-                      child: const Text(
-                        // 'Version 1.0.10',
-                        'Version 1.0.10 v13',
-                        style: TextStyle(
-                          color: AppTheme.primaryBlack,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
+                      child: FutureBuilder<PackageInfo>(
+                        future: PackageInfo.fromPlatform(),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.hasData ? 'Version ${snapshot.data!.version}' : 'Version ...',
+                            style: const TextStyle(
+                              color: AppTheme.primaryBlack,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(height: 16),

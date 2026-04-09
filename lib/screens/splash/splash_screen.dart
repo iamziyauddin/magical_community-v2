@@ -3,6 +3,7 @@ import 'package:magical_community/core/theme/app_theme.dart';
 import 'package:magical_community/data/services/auth_service.dart';
 import 'package:magical_community/screens/auth/login_screen.dart';
 import 'package:magical_community/screens/main/main_screen.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -54,9 +55,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.primaryBlack,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // App Logo (same as LoginScreen)
             SizedBox(
@@ -109,6 +112,25 @@ class _SplashScreenState extends State<SplashScreen> {
           ],
         ),
       ),
-    );
+      Positioned(
+        bottom: 16,
+        right: 16,
+        child: FutureBuilder<PackageInfo>(
+          future: PackageInfo.fromPlatform(),
+          builder: (context, snapshot) {
+            return Text(
+              snapshot.hasData ? 'v${snapshot.data!.version}' : '',
+              style: const TextStyle(
+                color: AppTheme.lightGrey,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            );
+          },
+        ),
+      ),
+    ],
+  ),
+);
   }
 }

@@ -253,20 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return UpgradeAlert(
-      upgrader: Upgrader(
-        onUpdate: () {
-          debugPrint('[Upgrader] User elected to update.');
-          return true;
-        },
-        onLater: () {
-          debugPrint('[Upgrader] User elected to update later.');
-          return true;
-        },
-        onIgnore: () {
-          debugPrint('[Upgrader] User elected to ignore the update.');
-          return true;
-        },
-      ),
+      upgrader: Upgrader(),
       child: Scaffold(
         body: Container(
         decoration: const BoxDecoration(gradient: AppTheme.primaryGradient),
