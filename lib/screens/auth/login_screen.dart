@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:upgrader/upgrader.dart';
 import 'package:magical_community/core/theme/app_theme.dart';
 import 'package:magical_community/data/services/auth_service.dart';
 import 'package:magical_community/screens/main/main_screen.dart';
@@ -251,8 +252,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return UpgradeAlert(
+      upgrader: Upgrader(
+        onUpdate: () {
+          debugPrint('[Upgrader] User elected to update.');
+          return true;
+        },
+        onLater: () {
+          debugPrint('[Upgrader] User elected to update later.');
+          return true;
+        },
+        onIgnore: () {
+          debugPrint('[Upgrader] User elected to ignore the update.');
+          return true;
+        },
+      ),
+      child: Scaffold(
+        body: Container(
         decoration: const BoxDecoration(gradient: AppTheme.primaryGradient),
         child: SafeArea(
           child: Center(
@@ -460,6 +476,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    ),
     );
   }
 }

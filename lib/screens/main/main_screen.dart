@@ -4,6 +4,7 @@ import 'package:magical_community/screens/dashboard/dashboard_screen.dart';
 import 'package:magical_community/screens/daily_entry/daily_entry_screen.dart';
 // import 'package:magical_community/screens/accounts/accounts_screen.dart';
 import 'package:magical_community/screens/settings/settings_screen.dart';
+import 'package:upgrader/upgrader.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -53,8 +54,23 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
+    return UpgradeAlert(
+      upgrader: Upgrader(
+        onUpdate: () {
+          debugPrint('[Upgrader] User elected to update in MainScreen.');
+          return true;
+        },
+        onLater: () {
+          debugPrint('[Upgrader] User elected to update later in MainScreen.');
+          return true;
+        },
+        onIgnore: () {
+          debugPrint('[Upgrader] User elected to ignore the update in MainScreen.');
+          return true;
+        },
+      ),
+      child: Scaffold(
+        body: IndexedStack(
         index: _currentIndex,
         children: _screens,
       ),
@@ -83,6 +99,7 @@ class _MainScreenState extends State<MainScreen> {
           items: _bottomNavItems,
         ),
       ),
+    ),
     );
   }
 }
